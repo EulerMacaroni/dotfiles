@@ -34,6 +34,7 @@ return {
     --   " ╚═╝  ╚═══╝╚══════╝ ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═╝ ",
     --   "                                                      ",
     -- }
+    -- two themes 
 
     -- Set color
     dashboard.section.header.opts.hl = "Title" -- lookup other hl groups with :highlight
