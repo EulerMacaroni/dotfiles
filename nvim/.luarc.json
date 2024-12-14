@@ -1,0 +1,14 @@
+{
+    "diagnostics.disable": [
+        "unused-local",
+        "param-type-mismatch",
+        "undefined-field",
+        "missing-fields",
+        "assign-type-mismatch",
+        "deprecated"
+    ],
+    "diagnostics.globals": [
+        "vim",
+        "default_capabilities"
+    ]
+}
