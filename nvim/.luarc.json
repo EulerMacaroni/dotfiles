@@ -9,6 +9,8 @@
     ],
     "diagnostics.globals": [
         "vim",
-        "default_capabilities"
+        "default_capabilities",
+        "ls",
+        "dynamic_node_external_update"
     ]
 }
