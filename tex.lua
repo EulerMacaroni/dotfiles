@@ -192,9 +192,9 @@ return {
 		f(function(_, snip)
 			local stripped = snip.trigger:sub(1, -2)
 			local depth = 0
-			local i = #stripped
-			while i > 0 do
-				if stripped:sub(i, i) == ")" then
+			local i1 = #stripped
+			while i1 > 0 do
+				if stripped:sub(i1, i1) == ")" then
 					depth = depth + 1
 				elseif stripped:sub(i, i) == "(" then
 					depth = depth - 1
@@ -202,10 +202,10 @@ return {
 				if depth == 0 then
 					break
 				end
-				i = i - 1
+				i1 = i1 - 1
 			end
-			local numerator = stripped:sub(i + 1, -1)
-			local prefix = stripped:sub(1, i - 1)
+			local numerator = stripped:sub(i1 + 1, -1)
+			local prefix = stripped:sub(1, i1 - 1)
 			return prefix .. "\\frac{" .. numerator .. "}"
 		end),
 		t("{"),

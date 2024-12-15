@@ -111,7 +111,13 @@ return {
 				a = { "<cmd>lua PdfAnnots()<CR>", "annotate" },
 				b = { "<cmd>terminal bibexport -o %:p:r.bib %:p:r.aux<CR>", "bib export" },
 				c = { "<cmd>:VimtexClearCache All<CR>", "clear vimtex" },
-				e = { "<cmd>e ~/.config/nvim/snippets/tex.snippets<CR>", "edit snippets" },
+				e = { "<cmd>e ~/.config/nvim/snippets/tex.lua<CR>", "Edit Snippets" },
+				-- e = {
+				-- 	function()
+				-- 		require("telescope").extensions.luasnip_picker.luasnip_picker()
+				-- 	end,
+				-- 	"LuaSnip Snippet Picker",
+				-- },
 				f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
 				g = { "<cmd>e ~/.config/nvim/templates/Glossary.tex<CR>", "edit glossary" },
 				-- h = { "<cmd>lua _HTOP_TOGGLE()<CR>", "htop" },

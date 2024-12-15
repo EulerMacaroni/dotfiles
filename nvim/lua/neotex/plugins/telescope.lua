@@ -86,7 +86,7 @@ return {
         "fzf",
         "yank_history",
         "bibtex",
-        "lazygit"
+        "lazygit",
       },
       extensions = {
         undo = {

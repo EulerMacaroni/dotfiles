@@ -46,6 +46,14 @@ return {
       -- keymap.set('n', 'j',     api.node.navigate.sibling.next,        opts('Next Sibling'))
       -- keymap.set('n', 'k',     api.node.navigate.sibling.prev,        opts('Previous Sibling'))
       -- keymap.set('n', 'e',     api.fs.rename_basename,                opts('Rename: Basename'))
+ -- New mapping for creating directories
+      keymap.set('n', 'A', function()
+			vim.ui.input({ prompt = "Create Directory: " }, function(input)
+				if input and input ~= "" then
+					api.fs.create(input .. "/") -- Appends '/' for directories
+				end
+			end)
+      end, opts('Create Directory'))
     end
 
     -- configure nvim-tree
