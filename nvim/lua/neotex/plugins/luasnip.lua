@@ -2,7 +2,15 @@ return {
 	"L3MON4D3/LuaSnip",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-    ls = require('luasnip')
+		ls = require("luasnip")
+		ls.setup({
+			region_check_events = "InsertEnter",
+		})
+		ls.config.set_config({
+			history = true, -- keep around last snippet local to jump back
+			enable_autosnippets = true,
+			store_selection_keys = "<Tab>",
+		})
 		-- require("luasnip.loaders.from_snipmate").load({ paths = "~/.config/nvim/snippets/" })
 		-- require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 		require("luasnip.loaders.from_lua").load({
@@ -39,7 +47,10 @@ return {
 			-- store which mode we're in to restore later.
 			local insert_pre_call = vim.fn.mode() == "i"
 			-- is byte-indexed! Doesn't matter here, but important to be aware of.
-			local cursor_pos_pre_relative = require("luasnip.util.util").pos_sub(require("luasnip.util.util").get_cursor_0ind(), current_node.mark:pos_begin_raw())
+			local cursor_pos_pre_relative = require("luasnip.util.util").pos_sub(
+				require("luasnip.util.util").get_cursor_0ind(),
+				current_node.mark:pos_begin_raw()
+			)
 
 			-- leave current generated snippet.
 			require("luasnip.nodes.util").leave_nodes_between(dynamic_node.snip, current_node)
@@ -69,12 +80,14 @@ return {
 				-- the node that the cursor was in when changeChoice was called exists
 				-- in the active choice! Enter it and all nodes between it and this choiceNode,
 				-- then set the cursor.
-				require('luasnip.nodes.util').enter_nodes_between(dynamic_node, target_node)
+				require("luasnip.nodes.util").enter_nodes_between(dynamic_node, target_node)
 
 				if insert_pre_call then
-					require('luasnip.util.util').set_cursor_0ind(require('luasnip.util.util').pos_add(target_node.mark:pos_begin_raw(), cursor_pos_pre_relative))
+					require("luasnip.util.util").set_cursor_0ind(
+						require("luasnip.util.util").pos_add(target_node.mark:pos_begin_raw(), cursor_pos_pre_relative)
+					)
 				else
-					require('luasnip.nodes.util').select_node(target_node)
+					require("luasnip.nodes.util").select_node(target_node)
 				end
 				-- set the new current node correctly.
 				ls.session.current_nodes[vim.api.nvim_get_current_buf()] = target_node
