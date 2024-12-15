@@ -59,7 +59,10 @@ vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<CR>", { remap = true })
   -- function ()
   --   require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer = false}))
   -- end, 
-
+--
+vim.keymap.set("n" ,"<leader>ps", function ()
+  require("telescope.builtin").grep_string({search = vim.fn.input("Grep > ")})
+end)
 
 -- Toggle comments
 keymap('n', '<C-Bslash>', '<Plug>(comment_toggle_linewise_current)', opts)
@@ -110,13 +113,14 @@ keymap("n", "<S-BS>", ":BufferLineMovePrev<CR>", opts)
 
 
 -- Drag lines
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-keymap("v", "<A-j>", ":m'>+<CR>gv", opts)
-keymap("v", "<A-k>", ":m-2<CR>gv", opts)
-
+-- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
+-- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
+-- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+-- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- keymap("v", "<A-j>", ":m'>+<CR>gv", opts)
+-- keymap("v", "<A-k>", ":m-2<CR>gv", opts)
+keymap("v", "J", ":m '>+1<CR>gv=gv",opts)
+keymap("v", "K", ":m '<-2<CR>gv=gv",opts)
 
 -- Horizontal line movments --
 keymap("n", "<c-u>", "<c-u>zz", opts)
@@ -140,8 +144,8 @@ keymap("n", ">", "<S-v>><esc>", opts)
 -- Navigate display lines
 keymap("n", "J", "gj", opts)
 keymap("n", "K", "gk", opts)
-keymap("v", "J", "gj", opts)
-keymap("v", "K", "gk", opts)
+-- keymap("v", "J", "gj", opts)
+-- keymap("v", "K", "gk", opts)
 
 -- map escape to jj --
 keymap("i", "jj", "<esc>", opts)

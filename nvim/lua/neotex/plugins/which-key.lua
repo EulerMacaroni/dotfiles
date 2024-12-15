@@ -103,6 +103,11 @@ return {
 			-- z = { "<cmd>ZenMode<CR>", "zen" },
 			a = {
 				name = "ACTIONS",
+				x = {
+					vim.keymap.set("n", "<leader>ax", function()
+						require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
+					end),
+				},
 				a = { "<cmd>lua PdfAnnots()<CR>", "annotate" },
 				b = { "<cmd>terminal bibexport -o %:p:r.bib %:p:r.aux<CR>", "bib export" },
 				c = { "<cmd>:VimtexClearCache All<CR>", "clear vimtex" },
@@ -252,7 +257,7 @@ return {
 				u = { "<cmd>TermExec cmd='nix flake update'<CR><C-w>j", "update" },
 			},
 			p = {
-				name = "PANDOC",
+				name = "PANDOC", -- working on having telescope
 				w = { "<cmd>TermExec cmd='pandoc %:p -o %:p:r.docx'<CR>", "word" },
 				m = { "<cmd>TermExec cmd='pandoc %:p -o %:p:r.md'<CR>", "markdown" },
 				h = { "<cmd>TermExec cmd='pandoc %:p -o %:p:r.html'<CR>", "html" },

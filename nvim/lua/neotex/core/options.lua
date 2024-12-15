@@ -12,13 +12,12 @@ local options = {
 	guifont = "monospace:h17", -- the font used in graphical neovim applications
 	background = "dark", -- colorschemes that can be light or dark will be made dark
 	termguicolors = true, -- set term gui colors (most terminals support this)
-	conceallevel = 2, -- to see the symbols on .tex file
 	number = true, -- set numbered lines
 	relativenumber = true, -- set relative numbered lines
 	numberwidth = 2, -- set number column width to 2 {default 4}
 	signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
 	cursorline = true, -- highlight the current line
-	linespace = 5, -- height of line
+	linespace = 2, -- height of line
 
 	-- colorcolumn = "100",             -- highlight vertical colorcolumn (moved to after/python.lua)
 	wrap = true, -- display lines as one long line
@@ -53,6 +52,10 @@ local options = {
 	virtualedit = "block", -- vitualblock mode doesn't get stuck at the end of line
 	inccommand = "split", -- shows all inline replacements in split
 	autoread = true,
+
+  -- Search 
+  -- hlsearch = false,
+  incsearch = true,
 }
 
 -- turns on all values in options table above
