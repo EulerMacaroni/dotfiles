@@ -100,6 +100,7 @@ return {
 			u = { "<cmd>Telescope undo<CR>", "undo" },
 			v = { "<cmd>VimtexView<CR>", "view" },
 			w = { "<cmd>wa!<CR>", "write" },
+      r = { "<cmd>!python3 %<CR>", "Run Python File" },
 			-- z = { "<cmd>ZenMode<CR>", "zen" },
 			a = {
 				name = "ACTIONS",
@@ -111,7 +112,7 @@ return {
 				a = { "<cmd>lua PdfAnnots()<CR>", "annotate" },
 				b = { "<cmd>terminal bibexport -o %:p:r.bib %:p:r.aux<CR>", "bib export" },
 				c = { "<cmd>:VimtexClearCache All<CR>", "clear vimtex" },
-				e = { "<cmd>e ~/.config/nvim/snippets/tex.lua<CR>", "Edit Snippets" },
+				e = { "<cmd>e ~/.config/nvim/snippets/tex/tex.lua<CR>", "TeX Snippets" },
 				-- e = {
 				-- 	function()
 				-- 		require("telescope").extensions.luasnip_picker.luasnip_picker()
@@ -126,12 +127,12 @@ return {
 				-- l = { "<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>", "LSP" },
 				-- m = { "<cmd>MarkdownPreview<CR>", "markdown preview" },
 
-				m = {
-					"<cmd>TermExec cmd='python3 /home/benjamin/Documents/Philosophy/Projects/ModelChecker/Code/src/model_checker %:p:r.py'<CR>",
-					"model checker",
-				},
+				-- m = {
+				-- 	"<cmd>TermExec cmd='python3 /home/benjamin/Documents/Philosophy/Projects/ModelChecker/Code/src/model_checker %:p:r.py'<CR>",
+				-- 	"model checker",
+				-- },
 				-- p = { "<cmd>TermExec cmd='python3 %:p:r.py'<CR>", "python" },
-				p = { "<cmd>!python3 %<CR>", "Run Python File" },
+				-- p = { "<cmd>!python3 %<CR>", "Run Python File" },
 				r = { "<cmd>VimtexErrors<CR>", "report errors" },
 				u = { "<cmd>cd %:p:h<CR>", "update cwd" },
 				v = { "<plug>(vimtex-context-menu)", "vimtex menu" },
