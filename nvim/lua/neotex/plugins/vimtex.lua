@@ -19,7 +19,7 @@ return {
 		}
 		vim.g.tex_conceal = "abdmg"
 
-	  vim.opt.conceallevel = 2 -- to see the symbols on .tex file
+	  -- vim.opt.conceallevel = 0 -- to see the symbols on .tex file
     --
 		vim.g.vimtex_view_general_options =
 			[[--synctex-forward @line:@col:@tex --synctex-editor-command 'nvim --headless --server /tmp/nvimserver --remote-send "<CR>:e %:p<CR>:call cursor(@line, 1)<CR>"']]
