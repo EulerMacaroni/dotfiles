@@ -315,7 +315,7 @@ return {
 			})
 		end,
 	},
-	{ --- plugin for copilot integration. (github.com/github/copilot.vim)
+	{ --- plugin for copilot integration. (github.com/github/copilot.vim) & remove credentials
 		"github/copilot.vim",
 	},
 }
