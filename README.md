@@ -4,6 +4,7 @@
 - Added python & LaTeX support.
 -https://github.com/evesdropper have written some cool Lua snippets that I can would never be able to do myself thus I forked it :)
 - Copilot Support added
+- Hover Menu set to my liking
 - To Do:
   - personal snippets & create a menu for set of snippets. 
   - Add jupyter notebook support

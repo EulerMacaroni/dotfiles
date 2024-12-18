@@ -38,7 +38,7 @@ return {
 				"yamlls",
 				"pyright",
 			},
-      automatic_installation = true,
+			automatic_installation = true,
 		})
 
 		require("mason-tool-installer").setup({
@@ -50,7 +50,7 @@ return {
 				"isort",
 				"mypy",
 				"pylint",
-        "latexindent"
+				"latexindent",
 			},
 		})
 
@@ -86,19 +86,37 @@ return {
 			},
 		})
 
-	-- Globally configure all LSP floating preview popups (like hover, signature help, etc)
-	-- local open_floating_preview = vim.lsp.util.open_floating_preview
-	-- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-	-- 	opts = opts or {}
-	-- 	opts.border = opts.border or "rounded" -- Set border to rounded
-	-- 	return open_floating_preview(contents, syntax, opts, ...)
-	-- end
+		-- Globally configure all LSP floating preview popups (like hover, signature help, etc)
+		-- local open_floating_preview = vim.lsp.util.open_floating_preview
+		-- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+		-- 	opts = opts or {}
+		-- 	opts.border = opts.border or "rounded" -- Set border to rounded
+		-- 	return open_floating_preview(contents, syntax, opts, ...)
+		-- end
+    vim.opt.updatetime = 500 -- Delay before CursorHold
+
+    -- Make LSP hover window non-focusable
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      focusable = false,
       border = "rounded",
     })
 
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
-      })
-    end,
+    -- Show LSP hover on CursorHold
+    vim.api.nvim_create_autocmd("CursorHold", {
+      pattern = { "*.py", "*.lua" },
+      callback = function()
+        local lsp_clients = vim.lsp.get_active_clients()
+        if next(lsp_clients) ~= nil then
+          vim.lsp.buf.hover()
+        end
+      end,
+    })
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			border = "rounded",
+		})
+
+		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+			border = "rounded",
+		})
+	end,
 }

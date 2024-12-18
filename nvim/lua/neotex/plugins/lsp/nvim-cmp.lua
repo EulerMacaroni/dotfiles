@@ -66,8 +66,8 @@ return {
 
 			cmp.setup({
 				completion = {
-					-- completeopt = "menu,noselect",
-					completeopt = "menuone,preview,noinsert,noselect",
+					completeopt = "menu,noselect",
+					-- completeopt = "menuone,preview,noinsert,noselect",
 					keyword_length = 1,
 				},
 				snippet = { -- configure how nvim-cmp interacts with snippet engine
@@ -81,7 +81,7 @@ return {
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					-- ["<C-n>"] = cmp.mapping.complete(), -- show completion suggestions
-					-- ["<C-h>"] = cmp.mapping.abort(), -- close completion window
+					["<C-h>"] = cmp.mapping.abort(), -- close completion window
 					-- ["<C-l>"] = cmp.mapping.confirm({ select = false }),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 					-- supertab
@@ -200,7 +200,7 @@ return {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         -- ["<C-n>"] = cmp.mapping.complete(), -- show completion suggestions
-        -- ["<C-h>"] = cmp.mapping.abort(), -- close completion window
+        ["<C-h>"] = cmp.mapping.abort(), -- close completion window
         -- ["<C-l>"] = cmp.mapping.confirm({ select = false }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         -- supertab
