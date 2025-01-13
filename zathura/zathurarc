@@ -3,6 +3,7 @@
 set synctex true
 set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
 
+
 # Basic Settings
 
 set highlight-transparency .1
@@ -68,3 +69,8 @@ set recolor                     true
 
 # set backend to avoid errors
 set database "sqlite"
+
+
+#  page break
+set page-padding 20
+

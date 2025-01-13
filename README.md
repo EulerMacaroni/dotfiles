@@ -8,4 +8,5 @@
 - To Do:
   - personal snippets & create a menu for set of snippets. 
   - Add jupyter notebook support
+  - Harpoon not working
 
