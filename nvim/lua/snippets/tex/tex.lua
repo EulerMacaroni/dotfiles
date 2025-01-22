@@ -616,7 +616,7 @@ local M = {
 	fmta([[ 
     \[ 
     <>
-    .\]
+    \]
     <>]],
 	{ i(1), i(0) }),
     { condition = line_begin, show_condition = line_begin }

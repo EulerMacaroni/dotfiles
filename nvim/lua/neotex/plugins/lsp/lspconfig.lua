@@ -102,15 +102,15 @@ return {
     })
 
     -- Show LSP hover on CursorHold
-    vim.api.nvim_create_autocmd("CursorHold", {
-      pattern = { "*.py", "*.lua" },
-      callback = function()
-        local lsp_clients = vim.lsp.get_active_clients()
-        if next(lsp_clients) ~= nil then
-          vim.lsp.buf.hover()
-        end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("CursorHold", {
+    --   pattern = { "*.py", "*.lua" },
+    --   callback = function()
+    --     local lsp_clients = vim.lsp.get_active_clients()
+    --     if next(lsp_clients) ~= nil then
+    --       vim.lsp.buf.hover()
+    --     end
+    --   end,
+    -- })
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "rounded",
 		})
