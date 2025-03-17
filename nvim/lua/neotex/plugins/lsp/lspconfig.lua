@@ -1,122 +1,240 @@
---eLSP Support
 return {
-	-- LSP Configuration
-	-- https://github.com/neovim/nvim-lspconfig
-	"neovim/nvim-lspconfig",
-	event = "VeryLazy",
-	dependencies = {
-		-- LSP Management
-		-- https://github.com/williamboman/mason.nvim
-		{ "williamboman/mason.nvim" },
-		-- https://github.com/williamboman/mason-lspconfig.nvim
-		{ "williamboman/mason-lspconfig.nvim" },
+  "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "antosha417/nvim-lsp-file-operations", config = true },
+  },
+  config = function()
+    -- import lspconfig plugin
+    local lspconfig = require("lspconfig")
 
-		-- Auto-Install LSPs, linters, formatters, debuggers
-		-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+    -- import cmp-nvim-lsp plugin
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		-- Useful status updates for LSP
-		-- https://github.com/j-hui/fidget.nvim
-		{ "j-hui/fidget.nvim", opts = {} },
+    -- used to enable autocompletion (assign to every lsp server config)
+    local default = cmp_nvim_lsp.default_capabilities()
 
-		-- Additional lua configuration, makes nvim stuff amazing!
-		-- https://github.com/folke/neodev.nvim
-		{ "folke/neodev.nvim", opts = {} },
-	},
-	config = function()
-		require("mason").setup()
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"bashls",
-				"cssls",
-				"html",
-				"lua_ls",
-				"jsonls",
-				"lemminx",
-				"marksman",
-				"quick_lint_js",
-				"yamlls",
-				"pyright",
-			},
-			automatic_installation = true,
-		})
+    -- Change the Diagnostic symbols in the sign column (gutter)
+    local signs = { Error = "", Warn = "", Hint = "󰠠", Info = "" }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
 
-		require("mason-tool-installer").setup({
-			-- Install these linters, formatters, debuggers automatically
-			ensure_installed = {
-				"black",
-				"debugpy",
-				"flake8",
-				"isort",
-				"mypy",
-				"pylint",
-				"latexindent",
-			},
-		})
-
-		-- There is an issue with mason-tools-installer running with VeryLazy, since it triggers on VimEnter which has already occurred prior to this plugin loading so we need to call install explicitly
-		-- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/issues/39
-		vim.api.nvim_command("MasonToolsInstall")
-
-		local lspconfig = require("lspconfig")
-		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-		local lsp_attach = function(client, bufnr)
-			-- Create your keybindings here...
-		end
-
-		-- Call setup on each LSP server
-		require("mason-lspconfig").setup_handlers({
-			function(server_name)
-				lspconfig[server_name].setup({
-					on_attach = lsp_attach,
-					capabilities = lsp_capabilities,
-				})
-			end,
-		})
-
-		-- Lua LSP settings
-		lspconfig.lua_ls.setup({
-			settings = {
-				Lua = {
-					diagnostics = {
-						-- Get the language server to recognize the `vim` global
-						globals = { "vim" },
-					},
-				},
-			},
-		})
-
-		-- Globally configure all LSP floating preview popups (like hover, signature help, etc)
-		-- local open_floating_preview = vim.lsp.util.open_floating_preview
-		-- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-		-- 	opts = opts or {}
-		-- 	opts.border = opts.border or "rounded" -- Set border to rounded
-		-- 	return open_floating_preview(contents, syntax, opts, ...)
-		-- end
-    vim.opt.updatetime = 500 -- Delay before CursorHold
-
-    -- Make LSP hover window non-focusable
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      focusable = false,
-      border = "rounded",
+    -- configure python server
+    lspconfig["pylsp"].setup({
+      capabilities = default,
     })
 
-    -- Show LSP hover on CursorHold
-    -- vim.api.nvim_create_autocmd("CursorHold", {
-    --   pattern = { "*.py", "*.lua" },
-    --   callback = function()
-    --     local lsp_clients = vim.lsp.get_active_clients()
-    --     if next(lsp_clients) ~= nil then
-    --       vim.lsp.buf.hover()
-    --     end
-    --   end,
-    -- })
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "rounded",
-		})
+    -- configure texlab (LaTeX LSP) server
+    lspconfig["texlab"].setup({
+      capabilities = default,
+      settings = {
+        texlab = {
+          build = {
+            onSave = true,
+          },
+          chktex = {
+            onEdit = false,
+            onOpenAndSave = false,
+          },
+          diagnosticsDelay = 300,
+          -- formatterLineLength = 80,
+          -- bibtexFormatter = "texlab",
+          -- -- Set up bibliography paths
+          -- bibParser = {
+          --   enabled = true,
+          --   -- Add paths where your .bib files might be located
+          --   paths = {
+          --     "./bib",           -- bib folder in current directory
+          --     "~/texmf/bibtex/bib", -- bib folder in Documents
+          --     vim.fn.expand("$HOME/texmf/bibtex/bib"), -- Expanded path to Bibliography folder
+          --   },
+          -- },
+          -- -- Enable forward search and inverse search if needed
+          -- forwardSearch = {
+          --   enabled = true,
+          -- },
+        },
+      },
+    })
 
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-			border = "rounded",
-		})
-	end,
+    -- configure lua server (with special settings)
+    lspconfig["lua_ls"].setup({
+      capabilities = default,
+      settings = {
+        -- custom settings for lua
+        Lua = {
+          -- make the language server recognize "vim" global
+          diagnostics = {
+            globals = { "vim" },
+          },
+          workspace = {
+            -- make language server aware of runtime files
+            library = {
+              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+              [vim.fn.stdpath("config") .. "/lua"] = true,
+            },
+          },
+        },
+      },
+    })
+  end,
 }
+-- return {
+-- 	-- LSP Configuration
+-- 	"neovim/nvim-lspconfig",
+--
+-- 	dependencies = {
+-- 		-- LSP Management
+-- 		{ "williamboman/mason.nvim" },
+-- 		{ "williamboman/mason-lspconfig.nvim" },
+--
+-- 		-- Auto-Install LSPs, Linters, Formatters
+-- 		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+--
+-- 		-- Useful status updates for LSP
+-- 		{ "j-hui/fidget.nvim", opts = {} },
+--
+-- 		-- Additional Lua configuration
+-- 		{ "folke/neodev.nvim", opts = {} },
+-- 	},
+--
+-- 	config = function()
+-- 		-- Load Mason & LSP Configs
+-- 		require("mason").setup()
+-- 		require("mason-lspconfig").setup({
+-- 			ensure_installed = {
+-- 				"bashls",
+-- 				"cssls",
+-- 				"html",
+-- 				"lua_ls",
+-- 				"jsonls",
+-- 				"lemminx",
+-- 				"marksman",
+-- 				"quick_lint_js",
+-- 				"yamlls",
+-- 				"pyright", -- Ensures Pyright is installed
+-- 			},
+-- 			automatic_installation = true,
+-- 		})
+--
+-- 		-- Ensure Linters/Formatters are installed
+-- 		require("mason-tool-installer").setup({
+-- 			ensure_installed = {
+-- 				"black",
+-- 				"debugpy",
+-- 				"flake8",
+-- 				"isort",
+-- 				"mypy",
+-- 				"pylint",
+-- 				"latexindent",
+-- 			},
+-- 		})
+--
+-- 		-- Ensure Mason installs missing tools
+-- 		-- vim.api.nvim_command("MasonToolsInstall")
+--
+-- 		-- Set up LSP handlers
+-- 		local lspconfig = require("lspconfig")
+-- 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+--
+-- 		-- Function to attach LSP clients
+-- 		local lsp_attach = function(client, bufnr)
+-- 			print("LSP started for: " .. client.name) -- Debug message
+-- 		end
+--
+-- 		-- Set up general LSP servers
+-- 		require("mason-lspconfig").setup_handlers({
+-- 			function(server_name)
+-- 				lspconfig[server_name].setup({
+-- 					on_attach = lsp_attach,
+-- 					capabilities = lsp_capabilities,
+-- 				})
+-- 			end,
+-- 		})
+--
+-- 		-- Explicit Pyright setup
+-- 		-- lspconfig.pyright.setup({
+-- 		-- 	-- cmd = {"/Users/azeem/.nvm/versions/node/v22.12.0/bin/pyright-langserver", "--stdio"},
+-- 		-- 	on_attach = function(client, bufnr)
+-- 		-- 		-- print("Pyright attached successfully")
+-- 		-- 	end,
+-- 		-- 	capabilities = lsp_capabilities,
+-- 		-- 	settings = {
+-- 		-- 		python = {
+-- 		-- 			analysis = {
+-- 		-- 				autoSearchPaths = true,
+-- 		-- 				useLibraryCodeForTypes = true,
+-- 		-- 				diagnosticMode = "workspace",
+-- 		-- 			},
+-- 		-- 		},
+-- 		-- 	},
+-- 		-- })
+--
+-- 		-- Lua LSP settings
+-- 		lspconfig.lua_ls.setup({
+-- 			settings = {
+-- 				Lua = {
+-- 					diagnostics = {
+-- 						globals = { "vim" }, -- Recognize Neovim globals
+-- 					},
+-- 				},
+-- 			},
+-- 		})
+--
+-- 		-- Floating preview UI tweaks
+-- 		vim.opt.updatetime = 500 -- Reduce delay for LSP popups
+-- 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+-- 			focusable = false,
+-- 			border = "rounded",
+-- 		})
+-- 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+-- 			border = "rounded",
+-- 		})
+-- 	end,
+-- }
+-- --
+-- -- return {
+-- --   {
+-- --     "williamboman/mason.nvim",
+-- --     lazy = false,
+-- --     config = function()
+-- --       require("mason").setup()
+-- --     end,
+-- --   },
+-- --   {
+-- --     "williamboman/mason-lspconfig.nvim",
+-- --     lazy = false,
+-- --     opts = {
+-- --       auto_install = true,
+-- --     },
+-- --   },
+-- --   {
+-- --     "neovim/nvim-lspconfig",
+-- --     lazy = false,
+-- --     config = function()
+-- --       local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- --
+-- --       local lspconfig = require("lspconfig")
+-- --       lspconfig.solargraph.setup({
+-- --         capabilities = capabilities
+-- --       })
+-- --       lspconfig.html.setup({
+-- --         capabilities = capabilities
+-- --       })
+-- --       lspconfig.lua_ls.setup({
+-- --         capabilities = capabilities
+-- --       })
+-- --       lspconfig.pyright.setup({
+-- --         capabilities = capabilities
+-- --       })
+-- --
+-- --       -- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+-- --       -- vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+-- --       -- vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+-- --       -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+-- --     end,
+-- --   },
+-- -- }

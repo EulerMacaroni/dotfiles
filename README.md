@@ -7,6 +7,8 @@
 - Hover Menu set to my liking
 - To Do:
   - personal snippets & create a menu for set of snippets. 
-  - Add jupyter notebook support
+  - Add jupyter notebook support and R markdown
   - Harpoon not working
+  - Configure LSP for python 
+  - Create directory from explore tree
 
