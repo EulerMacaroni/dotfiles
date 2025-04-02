@@ -23,10 +23,49 @@ return {
     end
 
     -- configure python server
-    lspconfig["pylsp"].setup({
-      capabilities = default,
-    })
+    -- lspconfig["pylsp"].setup({
+    --   capabilities = default,
+    -- })
 
+      require'lspconfig'.pylsp.setup{
+        on_attach = on_attach,
+        filetypes = { 'python' },
+        settings = {
+          configurationSources = { "flake8" },
+          pylsp = {
+            plugins = {
+              jedi_completion = {
+                include_params = true,
+              },
+              jedi_signature_help = {
+                enabled = true,
+              },
+              -- jedi = {
+              --   extra_paths = {
+              --     '~/projects/work_odoo/odoo14',
+              --     '~/projects/work_odoo/odoo14',
+              --   },
+              --   -- Uncomment and modify if you want to specify a virtual env
+                -- environment = "odoo",
+              -- },
+              pyflakes = {
+                enabled = true,
+              },
+              pylsp_mypy = {
+                enabled = false,
+              },
+              pycodestyle = {
+                enabled = true,
+                ignore = { 'E501', 'E231' },
+                maxLineLength = 120,
+              },
+              yapf = {
+                enabled = true,
+              },
+            },
+          },
+        },
+      }
     -- configure texlab (LaTeX LSP) server
     lspconfig["texlab"].setup({
       capabilities = default,
