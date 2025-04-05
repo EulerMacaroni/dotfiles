@@ -27,45 +27,57 @@ return {
     --   capabilities = default,
     -- })
 
-      require'lspconfig'.pylsp.setup{
-        on_attach = on_attach,
-        filetypes = { 'python' },
-        settings = {
-          configurationSources = { "flake8" },
-          pylsp = {
-            plugins = {
-              jedi_completion = {
-                include_params = true,
+    require("lspconfig").pylsp.setup({
+      -- on_attach = on_attach,
+      filetypes = { "python" },
+      settings = {
+        configurationSources = { "flake8" },
+        pylsp = {
+          plugins = {
+            jedi_completion = {
+              include_params = true,
+            },
+            jedi_signature_help = {
+              enabled = true,
+            },
+            -- jedi = {
+            --   extra_paths = {
+            --     '~/projects/work_odoo/odoo14',
+            --     '~/projects/work_odoo/odoo14',
+            --   },
+            --   -- Uncomment and modify if you want to specify a virtual env
+            -- environment = "odoo",
+            -- },
+            pyflakes = {
+              enabled = true,
+            },
+            pylsp_mypy = {
+              enabled = false,
+            },
+            pycodestyle = {
+              enabled = true,
+              ignore = {
+                "E501",
+                "E231",
+                "E203",
+                "E704",
+                "E302",
+                "E305",
+                "E251",
+                "E127",
+                "E124",
+                "F405",
+                "E501",
               },
-              jedi_signature_help = {
-                enabled = true,
-              },
-              -- jedi = {
-              --   extra_paths = {
-              --     '~/projects/work_odoo/odoo14',
-              --     '~/projects/work_odoo/odoo14',
-              --   },
-              --   -- Uncomment and modify if you want to specify a virtual env
-                -- environment = "odoo",
-              -- },
-              pyflakes = {
-                enabled = true,
-              },
-              pylsp_mypy = {
-                enabled = false,
-              },
-              pycodestyle = {
-                enabled = true,
-                ignore = { 'E501', 'E231' },
-                maxLineLength = 120,
-              },
-              yapf = {
-                enabled = true,
-              },
+              maxLineLength = 120,
+            },
+            yapf = {
+              enabled = true,
             },
           },
         },
-      }
+      },
+    })
     -- configure texlab (LaTeX LSP) server
     lspconfig["texlab"].setup({
       capabilities = default,
