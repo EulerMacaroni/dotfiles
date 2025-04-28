@@ -1,3 +1,4 @@
+-- this plugin is a file explorer for Neovim written in Lua
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -46,14 +47,6 @@ return {
       -- keymap.set('n', 'j',     api.node.navigate.sibling.next,        opts('Next Sibling'))
       -- keymap.set('n', 'k',     api.node.navigate.sibling.prev,        opts('Previous Sibling'))
       -- keymap.set('n', 'e',     api.fs.rename_basename,                opts('Rename: Basename'))
- -- New mapping for creating directories
-      keymap.set('n', 'A', function()
-			vim.ui.input({ prompt = "Create Directory: " }, function(input)
-				if input and input ~= "" then
-					api.fs.create(input .. "/") -- Appends '/' for directories
-				end
-			end)
-      end, opts('Create Directory'))
     end
 
     -- configure nvim-tree
@@ -242,7 +235,7 @@ return {
         number = false,
         relativenumber = false,
         signcolumn = "yes",
-        width = 30,
+        width = 35,
         float = {
           enable = false,
           quit_on_focus_loss = true,

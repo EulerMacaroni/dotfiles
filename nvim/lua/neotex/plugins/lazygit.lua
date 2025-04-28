@@ -1,3 +1,4 @@
+-- GitHub related
 return {
   "kdheepak/lazygit.nvim",
   event = { "BufReadPre", "BufNewFile" },

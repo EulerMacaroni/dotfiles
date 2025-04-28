@@ -106,6 +106,7 @@ return {
             },
           },
         },
+        -- need to look into this when I have time
         bibtex = {
           depth = 1,
           -- Depth for the *.bib file

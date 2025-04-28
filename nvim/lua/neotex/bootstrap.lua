@@ -13,8 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { import = "neotex.plugins" },    -- main plugins directory
-  { import = "neotex.plugins.lsp" } -- lsp plugins directory
+  { import = "neotex.plugins" }, -- main plugins directory
+  { import = "neotex.plugins.lsp" }, -- lsp plugins directory
 }, {
   install = {
     colorscheme = { "gruvbox" },
@@ -25,5 +25,9 @@ require("lazy").setup({
   },
   change_detection = {
     notify = false,
+  },
+  rocks = {
+    hererocks = false,
+    enabled = false,
   },
 })

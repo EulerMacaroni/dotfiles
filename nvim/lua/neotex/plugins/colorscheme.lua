@@ -1,31 +1,4 @@
--- GRUVBOX
--- return {
---   "ellisonleao/gruvbox.nvim",
---   priority = 1000, -- make sure to load this before all the other start plugins
---   config = function()
---     require("gruvbox").setup({
---       overrides = {
---         -- THIS BLOCK
---         SignColumn = { bg = "#282828" },
---         NvimTreeCutHL = { fg = "#fb4934", bg = "#282828" },
---         NvimTreeCopiedHL = { fg = "#b8bb26", bg = "#282828" },
---         DiagnosticSignError = { fg = "#fb4934", bg = "#282828" },
---         DiagnosticSignWarn = { fg = "#fabd2f", bg = "#282828" },
---         DiagnosticSignHint = { fg = "#8ec07c", bg = "#282828" },
---         DiagnosticSignInfo = { fg = "#d3869b", bg = "#282828" },
---         -- OR THIS BLOCK
---         -- NvimTreeCutHL = { fg="#fb4934", bg="#3c3836" },
---         -- NvimTreeCopiedHL = { fg="#b8bb26", bg="#3c3836" }
---         -- END
---       }
---     })
---     vim.cmd("colorscheme gruvbox")
---   end,
--- }
-
-
 -- catppuccin
-
 return {
   {
     "catppuccin/nvim",
@@ -33,13 +6,42 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
+      require("catppuccin").setup({
+        color_overrides = {
+          mocha = {
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
+          },
+        },
+      })
       vim.cmd.colorscheme "catppuccin-mocha"
     end
   }
 }
-
-
-
+-- GRUVBOX
+--
+-- return {
+--   "ellisonleao/gruvbox.nvim",
+--   priority = 1000, -- make sure to load this before all the other start plugins
+--   config = function()
+--     require("gruvbox").setup({
+--       overrides = {
+--         SignColumn = { bg = "#282828" },
+--         NvimTreeCutHL = { fg = "#fb4934", bg = "#282828" },
+--         NvimTreeCopiedHL = { fg = "#b8bb26", bg = "#282828" },
+--         DiagnosticSignError = { fg = "#fb4934", bg = "#282828" },
+--         DiagnosticSignWarn = { fg = "#fabd2f", bg = "#282828" },
+--         DiagnosticSignHint = { fg = "#8ec07c", bg = "#282828" },
+--         DiagnosticSignInfo = { fg = "#d3869b", bg = "#282828" },
+--         DiffText = { fg = "#ebdbb2", bg = "#3c3836" },
+--         DiffAdd = { fg = "#ebdbb2", bg = "#32361a" },
+--       }
+--     })
+--     vim.cmd("colorscheme gruvbox")
+--   end,
+-- }
+--
 -- -- MONOKAI
 -- return {
 --   "tanvirtin/monokai.nvim",  -- Monokai theme
@@ -87,8 +89,6 @@ return {
 --   end,
 -- }
 
-
-
 -- -- NIGHTFLY
 -- return {
 --   "bluz71/vim-nightfly-guicolors",
@@ -98,7 +98,6 @@ return {
 --     vim.cmd("colorscheme nightfly")
 --   end,
 -- }
-
 
 -- OTHER
 -- "luisiacc/gruvbox-baby"

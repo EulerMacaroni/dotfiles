@@ -1,3 +1,5 @@
+-- This plugin nvim-autopairs is used to automatically add closing brackets, quotes, and other pairs of characters in Neovim. 
+-- Configured for use with nvim-cmp for autocompletion, and has specific rules for handling pairs in LaTeX files.
 return {
   "windwp/nvim-autopairs",
   event = { "InsertEnter" },

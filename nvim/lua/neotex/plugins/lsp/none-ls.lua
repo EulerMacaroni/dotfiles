@@ -15,7 +15,8 @@ return {
         "stylua",   -- lua formatter
         "isort",    -- python formatter
         "black",    -- python formatter
-        "pylint",   -- python linter
+        -- "pylint",   -- python linter
+        -- "ruff"
       },
       automatic_installation = true,
       handlers = {},
@@ -60,14 +61,14 @@ return {
           extra_args = { "--fast", "--line-length", "88" },
         }),
         -- diagnostics.pylint, -- instead of below
-        diagnostics.pylint.with({
-          extra_args = {
-            "--output-format=text",
-            "--msg-template={line}:{column}:{category}:{msg}",
-            "--score=no",
-          },
-          diagnostics_format = "#{m} (#{c})",
-        }),
+        -- diagnostics.pylint.with({
+        --   extra_args = {
+        --     "--output-format=json",
+        --     "--msg-template={line}:{column}:{category}:{msg}",
+        --     "--score=no",
+        --   },
+        --   diagnostics_format = "#{m} (#{c})",
+        -- }),
       },
       -- -- configure format on save: uncomment augroup above
       -- on_attach = function(current_client, bufnr)

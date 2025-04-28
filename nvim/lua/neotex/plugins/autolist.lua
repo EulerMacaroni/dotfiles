@@ -1,3 +1,4 @@
+-- this plugin is used to auto-generate lists in markdown strictly
 return {
   "gaoDean/autolist.nvim",
   filetype = {

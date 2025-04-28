@@ -1,3 +1,5 @@
+-- luasnip configured with the custom tex snippets 
+-- don't mess with this for now!!
 return {
 	"L3MON4D3/LuaSnip",
 	event = { "BufReadPre", "BufNewFile" },

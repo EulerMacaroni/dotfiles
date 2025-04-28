@@ -1,3 +1,5 @@
+-- Firenvim configuration the chrome extension has been taken down
+-- check back !
 return {
   "glacambre/firenvim",
   -- Lazy load firenvim

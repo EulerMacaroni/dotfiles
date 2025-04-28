@@ -1,3 +1,4 @@
+-- this plugin is used to show indentation levels in the code
 return {
   "lukas-reineke/indent-blankline.nvim",
   -- dependencies = {},

@@ -1,3 +1,6 @@
+-- this file is used to configure dap-python
+-- to debug python code 
+-- will configure when I need it.
 return {
   -- -- https://github.com/mfussenegger/nvim-dap-python
   -- 'mfussenegger/nvim-dap-python',
