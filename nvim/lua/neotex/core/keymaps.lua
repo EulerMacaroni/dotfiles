@@ -203,8 +203,8 @@ vim.g.mapleader = " " -- Space as leader key
 
 -- Prevents common mode mistakes
 map("n", "<C-z>", "<nop>", {}, "Disable suspend")
--- map("n", "gc", "<nop>", {}, "Disable gc mappings")
--- map("n", "gcc", "<nop>", {}, "Disable gcc mappings")
+map("n", "gc", "<nop>", {}, "Disable gc mappings")
+map("n", "gcc", "<nop>", {}, "Disable gcc mappings")
 
 -- Terminal integration
 map("n", "<C-t>", "<cmd>ToggleTerm<CR>", { remap = true }, "Toggle terminal")

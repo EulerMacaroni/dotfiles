@@ -24,7 +24,9 @@ return {
       enabled = true,
       preset = require("neotex.plugins.snacks.dashboard").preset,
       sections = require("neotex.plugins.snacks.dashboard").sections,
-      -- sections = require("neotex.plugins.snacks.gh_dashboard").sections,
+      -- footer = require("fortune").get_fortune(),
+      -- footer = require("neotex.plugins.snacks.dashboard").footer
+      -- sections_definitions = require("neotex.plugins.snacks.dashboard").sections_definitions,
     },
     git = { enabled = true },
     gitbrowse = { enabled = true },
@@ -150,7 +152,7 @@ return {
             -- inlay_hints = false,
         },
         show = {
-            statusline = false,
+            statusline = true,
             tabline = false,
         },
         win = { style = 'zen' },

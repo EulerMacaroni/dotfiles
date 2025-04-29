@@ -238,7 +238,7 @@ return {
       },
       win = {
         no_overlap = true,
-        width = 1,
+        width = 350,
         height = { min = 4, max = 25 },
         col = 0,
         row = math.huge,
