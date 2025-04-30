@@ -1,4 +1,3 @@
--- catppuccin
 return {
   {
     "catppuccin/nvim",
@@ -14,10 +13,18 @@ return {
             crust = "#000000",
           },
         },
+        highlight_overrides = {
+          mocha = function(colors)
+            return {
+              NormalFloat = { bg = "#1e1e2e", fg = colors.text },
+              -- FloatBorder = { bg = "#1e1e2e", fg = colors.lavender },
+            }
+          end,
+        },
       })
-      vim.cmd.colorscheme "catppuccin-mocha"
-    end
-  }
+      vim.cmd.colorscheme("catppuccin-mocha")
+    end,
+  },
 }
 -- GRUVBOX
 --

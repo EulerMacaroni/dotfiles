@@ -208,7 +208,7 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   dependencies = {
-    'echasnovski/mini.nvim',
+    "echasnovski/mini.nvim",
   },
   opts = {
     setup = {
@@ -216,7 +216,7 @@ return {
       show_keys = false, -- show the currently pressed key and its label as a message in the command line
       notify = false,    -- prevent which-key from automatically setting up fields for defined mappings
       triggers = {
-         "<leader>"
+        "<leader>",
         --{ "<leader>", mode = { "n", "v" } },
       },
       plugins = {
@@ -242,7 +242,7 @@ return {
         height = { min = 4, max = 25 },
         col = 0,
         row = math.huge,
-        border = "rounded", -- can be 'none', 'single', 'double', 'shadow', etc.
+        border = "none",    -- can be 'none', 'single', 'double', 'shadow', etc.
         padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
         title = false,
         title_pos = "center",
@@ -250,7 +250,7 @@ return {
         -- Additional vim.wo and vim.bo options
         bo = {},
         wo = {
-          winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+          winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
         },
       },
       -- add operators that will trigger motion and text object completion
@@ -265,7 +265,7 @@ return {
         width = { min = 20, max = 50 }, -- min and max width of the columns
         height = { min = 4, max = 25 }, -- min and max height of the columns
         spacing = 3,                    -- spacing between columns
-        align = "center",                 -- align columns left, center or right
+        align = "center",               -- align columns left, center or right
       },
       keys = {
         scroll_down = "<c-d>", -- binding to scroll down inside the popup
@@ -276,8 +276,8 @@ return {
       -- Disabled by default for Telescope
       disable = {
         bt = { "help", "quickfix", "terminal", "prompt" }, -- for example
-        ft = { "NvimTree" }                                -- add your explorer's filetype here
-      }
+        ft = { "NvimTree" },                               -- add your explorer's filetype here
+      },
     },
     defaults = {
       buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
@@ -365,7 +365,7 @@ return {
         t = { "<cmd>Gitsigns toggle_current_line_blame<CR>", "toggle blame" },
         -- t = { "<cmd>Gitsigns toggle_word_diff<CR>", "toggle word diff" },
       },
-      -- h = { -- plugins for AI support 
+      -- h = { -- plugins for AI support
       --   name = "AI HELP",
       --   a = { "<cmd>AvanteAsk<CR>", "ask" },
       --   b = { "<cmd>AvanteBuild<CR>", "build dependencies" },
@@ -400,7 +400,7 @@ return {
         c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "code action" },
         d = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
         D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "declaration" },
-        h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "help" },
+        h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "hover" },
         i = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
         k = { "<cmd>LspStop<CR>", "kill lsp" },
         l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "line diagnostics" },
@@ -467,8 +467,18 @@ return {
         -- h = { "<cmd>Hardtime toggle<cr>", "hardtime" }, -- Hardtime plugin has been deprecated
         -- k = { "<cmd>TermExec cmd='rm -rf ~/.local/share/nvim/lazy &' open=0<CR>", "wipe plugin files" },
         -- m = { "<cmd>MCPHub<cr>", "mcp-hub" }, -- MCP-Hub plugin has been deprecated
-        n = { function() vim.diagnostic.goto_next{popup_opts = {show_header = false}} end, "next" },
-        p = { function() vim.diagnostic.goto_prev{popup_opts = {show_header = false}} end, "prev" },
+        n = {
+          function()
+            vim.diagnostic.goto_next({ popup_opts = { show_header = false } })
+          end,
+          "next",
+        },
+        p = {
+          function()
+            vim.diagnostic.goto_prev({ popup_opts = { show_header = false } })
+          end,
+          "prev",
+        },
         r = { "<cmd>ReloadConfig<cr>", "reload configs" },
         m = { "<cmd>lua Snacks.notifier.show_history()<cr>", "show messages" },
         -- d = { "function() vim.diagnostic.open_float(0, { scope = 'line', header = false, focus = false }) end", "diagnostics" },

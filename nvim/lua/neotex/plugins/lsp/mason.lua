@@ -32,7 +32,7 @@ return {
       ensure_installed = {
         -- "html",
         -- "emmet_ls",
-        "pyright",
+        -- "pyright",
         -- "tsserver",
         -- "lua_ls",   -- seems to cause trouble
         -- "cssls",
@@ -51,7 +51,7 @@ return {
         "stylua",   -- lua formatter
         "isort",    -- python formatter
         "black",    -- python formatter
-        "pylint",   -- python linter
+        -- "pylint",   -- python linter
         -- "eslint_d", -- js linter
       },
     })

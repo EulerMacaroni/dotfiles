@@ -1,8 +1,8 @@
 -- Display vim messages in quickfix window
 function DisplayMessages()
   -- Get all messages and split them into lines
-  local messages = vim.fn.execute('messages')
-  local lines = vim.split(messages, '\n')
+  local messages = vim.fn.execute("messages")
+  local lines = vim.split(messages, "\n")
 
   -- Create quickfix items from messages
   local qf_items = vim.tbl_map(function(line)
@@ -11,25 +11,25 @@ function DisplayMessages()
 
   -- Set the quickfix list and open it
   vim.fn.setqflist(qf_items)
-  vim.cmd('copen')
+  vim.cmd("copen")
 end
 
 -- Find all instances of a word in a project with telescope
 function SearchWordUnderCursor()
-  local word = vim.fn.expand('<cword>')
-  require('telescope.builtin').live_grep({ default_text = word })
+  local word = vim.fn.expand("<cword>")
+  require("telescope.builtin").live_grep({ default_text = word })
 end
 
 -- Reload neovim config
-vim.api.nvim_create_user_command('ReloadConfig', function()
+vim.api.nvim_create_user_command("ReloadConfig", function()
   for name, _ in pairs(package.loaded) do
-    if name:match('^plugins') then
+    if name:match("^plugins") then
       package.loaded[name] = nil
     end
   end
 
   dofile(vim.env.MYVIMRC)
-  vim.notify('Nvim configuration reloaded!', vim.log.levels.INFO)
+  vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end, {})
 
 -- Go to next/previous most recent buffer, excluding buffers where winfixbuf = true
@@ -78,7 +78,7 @@ function GotoBuffer(count, direction)
   end
 
   -- Find current buffer index
-  local current = vim.fn.bufnr('%')
+  local current = vim.fn.bufnr("%")
   local current_index = 1
   for i, buf in ipairs(target_buffers) do
     if buf.bufnr == current then
@@ -96,14 +96,14 @@ function GotoBuffer(count, direction)
   end
 
   -- Switch to target buffer
-  vim.cmd('buffer ' .. target_buffers[target_index].bufnr)
+  vim.cmd("buffer " .. target_buffers[target_index].bufnr)
 end
 
 -- Function to toggle between fully open and fully closed folds
 function _G.ToggleAllFolds()
   -- Get current state by checking if any folds are closed
   local all_open = true
-  local line_count = vim.fn.line('$')
+  local line_count = vim.fn.line("$")
 
   for i = 1, line_count do
     if vim.fn.foldclosed(i) ~= -1 then
@@ -115,11 +115,11 @@ function _G.ToggleAllFolds()
 
   if all_open then
     -- All folds are open, so close them all
-    vim.cmd('normal! zM')
+    vim.cmd("normal! zM")
     vim.notify("All folds closed", vim.log.levels.INFO)
   else
     -- Some folds are closed, so open them all
-    vim.cmd('normal! zR')
+    vim.cmd("normal! zR")
     vim.notify("All folds opened", vim.log.levels.INFO)
   end
 end
@@ -171,7 +171,7 @@ function _G.ToggleFoldingMethod()
   local fold_state_file = cache_dir .. "/folding_state"
 
   -- Ensure the cache directory exists
-  vim.fn.mkdir(cache_dir, 'p')
+  vim.fn.mkdir(cache_dir, "p")
 
   -- The current folding method
   local current_method = vim.wo.foldmethod
@@ -341,7 +341,7 @@ function M.ExtractUrlsFromLine(line)
                 start = full_link_start,
                 finish = full_link_end,
                 url_start = url_start,
-                url_end = url_start + #url - 1
+                url_end = url_start + #url - 1,
               })
             end
           end
@@ -350,7 +350,8 @@ function M.ExtractUrlsFromLine(line)
           -- Find the full tag containing this href
           local tag_start = line:find(
             "<a%s+[^>]*href=[\"']" .. url_match:gsub("([%%%-%+%_%:%&%=%?%/%(%)%#%$%@%!%~%*])", "%%%1") .. "[\"'][^>]*>",
-            1)
+            1
+          )
           if tag_start then
             -- Find the closing > of this tag
             local tag_end = line:find(">", tag_start)
@@ -360,7 +361,7 @@ function M.ExtractUrlsFromLine(line)
                 start = tag_start,
                 finish = tag_end,
                 url_start = line:find(url, tag_start, true),
-                url_end = line:find(url, tag_start, true) + #url - 1
+                url_end = line:find(url, tag_start, true) + #url - 1,
               })
             end
           end
@@ -369,7 +370,7 @@ function M.ExtractUrlsFromLine(line)
           table.insert(urls, {
             url = url,
             start = start_idx,
-            finish = start_idx + #url - 1
+            finish = start_idx + #url - 1,
           })
         end
       end
@@ -397,11 +398,15 @@ function M.OpenUrlAtPosition(line_num, col)
   end
 
   line = line[1]
-  if not line or line == "" then return false end
+  if not line or line == "" then
+    return false
+  end
 
   -- Extract all URLs from the line
   local urls = M.ExtractUrlsFromLine(line)
-  if #urls == 0 then return false end
+  if #urls == 0 then
+    return false
+  end
 
   -- Find the URL at or closest to the position
   local selected_url = nil
@@ -440,9 +445,11 @@ function M.OpenUrlAtPosition(line_num, col)
       selected_url = "file://" .. selected_url
 
       -- Make sure web URLs have protocol prefix
-    elseif not selected_url:match("^https?://") and
-        not selected_url:match("^file://") and
-        not selected_url:match("^mailto:") then
+    elseif
+        not selected_url:match("^https?://")
+        and not selected_url:match("^file://")
+        and not selected_url:match("^mailto:")
+    then
       -- Handle www URLs
       if selected_url:match("^www%.") then
         selected_url = "https://" .. selected_url
@@ -460,7 +467,7 @@ function M.OpenUrlAtPosition(line_num, col)
     elseif vim.fn.has("unix") == 1 then
       cmd = string.format("silent !xdg-open '%s' &", selected_url:gsub("'", "\\'"))
     elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-      cmd = string.format("silent !start \"\" \"%s\"", selected_url:gsub('"', '\\"'))
+      cmd = string.format('silent !start "" "%s"', selected_url:gsub('"', '\\"'))
     else
       vim.notify("Platform not supported for opening URLs", vim.log.levels.ERROR)
       return false
@@ -527,8 +534,12 @@ function M.SetupUrlMappings()
   end
 
   -- Add keybinding to open the URL under cursor with gx for familiar Vim behavior
-  vim.keymap.set("n", "gx", ":lua OpenUrlUnderCursor()<CR>",
-    vim.tbl_extend("force", opts, { desc = "Open URL under cursor" }))
+  vim.keymap.set(
+    "n",
+    "gx",
+    ":lua OpenUrlUnderCursor()<CR>",
+    vim.tbl_extend("force", opts, { desc = "Open URL under cursor" })
+  )
 
   -- Enable Ctrl+Click to open URLs with error handling
   vim.keymap.set("n", "<C-LeftMouse>", function()
@@ -547,6 +558,5 @@ function M.SetupUrlMappings()
   -- Mark mappings as set up
   M._url_mappings_setup = true
 end
-
 -- Return the module
 return M
