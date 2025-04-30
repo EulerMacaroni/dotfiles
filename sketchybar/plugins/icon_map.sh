@@ -528,8 +528,8 @@ function __icon_map() {
    "Telegram")
         icon_result=":telegram:"
         ;;
-   "Terminal" | "终端")
-        icon_result=":terminal:"
+  "Alacritty" | "Hyper" | "iTerm2" | "kitty" | "Terminal" | "终端" | "WezTerm")
+    icon_result=":terminal:"
         ;;
    "Typora")
         icon_result=":text:"
