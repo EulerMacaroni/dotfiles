@@ -15,7 +15,6 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local default = cmp_nvim_lsp.default_capabilities()
 
-
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       border = "rounded",
     })
@@ -116,6 +115,11 @@ return {
           },
         },
       },
+    })
+    require("lspconfig").gopls.setup({
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod" },
+      root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
     })
   end,
 }

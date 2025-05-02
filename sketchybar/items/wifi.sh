@@ -1,8 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-SSID=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | awk -F:  '($1 ~ "^ *SSID$"){print $2}' | cut -c 2-)
+# Filename: ~/github/dotfiles-latest/sketchybar/felixkratz-linkarzu/items/wifi.sh
 
-sketchybar --set wifi \
-  icon=􀙇 \
-  icon.color=0xff58d1fc \
-  label="$SSID"
+source "$CONFIG_DIR/icons.sh"
+
+wifi=(
+  padding_right=0.5
+  padding_left=1
+  label.width=0
+  icon="$WIFI_DISCONNECTED"
+  script="$PLUGIN_DIR/wifi.sh"
+)
+
+sketchybar --add item wifi right \
+  --set wifi "${wifi[@]}" \
+  --subscribe wifi wifi_change mouse.clicked

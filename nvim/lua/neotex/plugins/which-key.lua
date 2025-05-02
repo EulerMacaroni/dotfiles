@@ -237,20 +237,20 @@ return {
         },
       },
       win = {
-        no_overlap = true,
+        no_overlap = false,
         width = 350,
         height = { min = 4, max = 25 },
         col = 0,
         row = math.huge,
-        border = "none",    -- can be 'none', 'single', 'double', 'shadow', etc.
-        padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+        border = "double",    -- can be 'none', 'single', 'double', 'shadow', etc.
+        -- padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
         title = false,
         title_pos = "center",
         zindex = 1000,
         -- Additional vim.wo and vim.bo options
         bo = {},
         wo = {
-          winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+          winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
         },
       },
       -- add operators that will trigger motion and text object completion

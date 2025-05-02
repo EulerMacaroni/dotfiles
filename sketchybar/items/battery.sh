@@ -3,6 +3,7 @@
 battery=(
   script="$PLUGIN_DIR/battery.sh"
   icon.font="$FONT:Regular:19.0"
+  # icon.color=$WHITE
   padding_right=3
   padding_left=0
   label.drawing=off

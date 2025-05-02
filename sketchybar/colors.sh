@@ -30,11 +30,18 @@ export BG0=0xff1e1e2e
 export BG1=0x603c3e4f
 export BG2=0x60494d64
 
-export BATTERY_1=0xffa6da95
-export BATTERY_2=0xffeed49f
-export BATTERY_3=0xfff5a97f
-export BATTERY_4=0xffee99a0
-export BATTERY_5=0xffed8796
+export BATTERY_1=0xffcad3f5
+export BATTERY_2=0xffcad3f5
+export BATTERY_3=0xffcad3f5
+export BATTERY_4=0xffcad3f5
+export BATTERY_5=0xffcad3f5
+
+
+# export BATTERY_1=0xffa6da95
+# export BATTERY_2=0xffeed49f
+# export BATTERY_3=0xfff5a97f
+# export BATTERY_4=0xffee99a0
+# export BATTERY_5=0xffed8796
 
 # General bar colors
 export BAR_COLOR=$BG0
