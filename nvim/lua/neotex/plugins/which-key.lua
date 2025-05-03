@@ -290,7 +290,8 @@ return {
       c = { "<cmd>vert sb<CR>", "create split" },
       d = { "<cmd>update! | lua Snacks.bufdelete()<CR>", "delete buffer" },
       -- d = { "<cmd>update! | bdelete!<CR>", "delete buffer" },
-      e = { "<cmd>NvimTreeToggle<CR>", "explorer" },
+      -- e = { "<cmd>NvimTreeToggle<CR>", "explorer" }, -- 
+      e = { "<cmd>NvimTreeFindFileToggle<CR>", "explorer" }, -- open file tree on current file
       j = { "<cmd>clo<CR>", "drop split" },
       i = { "<cmd>VimtexTocOpen<CR>", "index" },
       k = { "<cmd>on<CR>", "max split" },

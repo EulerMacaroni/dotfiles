@@ -143,7 +143,7 @@ return {
     win = { enabled = true },
     words = { enabled = false },
     zen = {
-        enabled = false,
+        enabled = true,
         toggles = {
             dim = true,
             git_signs = false,
