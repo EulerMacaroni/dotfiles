@@ -1,0 +1,108 @@
+{
+    "workbench.colorTheme": "Monokai Vibrant",
+    "vim.insertModeKeyBindings": [
+        
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "explorer.confirmDelete": false,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "git.openRepositoryInParentFolders": "always",
+    "workbench.iconTheme": "vscode-icons",
+    "oracledevtools.bookmarkFileFolder": "/Users/azeem/Oracle/oracle.oracledevtools",
+    "oracledevtools.download.otherFolder": "/Users/azeem/downloads",
+    "oracledevtools.connectionConfiguration.configFilesFolder": "/Users/azeem/Oracle/network/admin",
+    "[oraclesql]": {
+        "editor.suggest.showSnippets": true,
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    "oracledevtools.connectionConfiguration.walletFileFolder": "/Users/azeem/Oracle/network/admin",
+    "liveshare.notebooks.allowGuestExecuteCells": true,
+    "workbench.editorAssociations": {
+        "*.pdf": "pdf.preview"
+    },
+
+    "files.associations": {
+      "*.Rmd": "rmd"
+},
+    "editor.minimap.size": "fill",
+    "openInDefaultBrowser.run.openWithLocalHttpServer": false,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "notebook.lineNumbers": "on",
+    "MarkdownEnglishWordHint.activation": {
+        "json": true
+    },
+    "notebook.output.textLineLimit": 50,
+    "notebook.stickyScroll.enabled": true,
+    "notebook.editorOptionsCustomizations": {
+
+    },
+    "window.zoomLevel": -1,
+    "dataWrangler.enabledFileTypes": {
+        "jsonl": true
+    },
+    "vim.digraphs": {
+
+    },
+
+    // "vim.normalModeKeyBindings": [],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["J"],
+            "commands": [
+                ":m '>+1<CR>gv=gv"
+            ]
+        },
+        {
+            "before": ["K"],
+            "commands": [
+                ":m '<-2<CR>gv=gv"
+            ]
+        }
+    ],
+    "vim.easymotion": true,
+    "vim.commandLineModeKeyBindings": [
+
+
+    ],
+    "vim.camelCaseMotion.enable": true,
+    "vim.foldfix": true,
+    "vim.highlightedyank.enable": true,
+    "vim.statusBarColors.surroundinputmode": [
+        "#007acc",
+        "#ffffff"
+    ],
+    "C_Cpp.default.compilerPath": "/usr/bin/clang",
+    "vim.commandLineModeKeyBindingsNonRecursive": [],
+    "security.workspace.trust.untrustedFiles": "open",
+    "sqldeveloper.sqlHistory.historyLimit": 500,
+    "sqldeveloper.telemetry.enabled": true,
+    "python.locator": "js",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "editor.minimap.enabled": false,
+    "leetcode.workspaceFolder": "/Users/azeem/Desktop/Graduate/_init_/Leetcode Official",
+    "leetcode.hint.commandShortcut": false,
+    "leetcode.hint.configWebviewMarkdown": false,
+    "leetcode.hint.commentDescription": false,
+    "leetcode.defaultLanguage": "python3",
+    "python.createEnvironment.trigger": "off"
+
+}

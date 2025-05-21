@@ -121,5 +121,9 @@ return {
       filetypes = { "go", "gomod" },
       root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
     })
+    require("lspconfig").clangd.setup({
+      cmd = { "clangd", "--compile-commands-dir=build" },
+      root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".git"),
+    })
   end,
 }
