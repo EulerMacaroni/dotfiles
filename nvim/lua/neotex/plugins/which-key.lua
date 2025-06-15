@@ -293,7 +293,7 @@ return {
       -- e = { "<cmd>NvimTreeToggle<CR>", "explorer" }, -- 
       e = { "<cmd>NvimTreeFindFileToggle<CR>", "explorer" }, -- open file tree on current file
       j = { "<cmd>clo<CR>", "drop split" },
-      i = { "<cmd>VimtexTocOpen<CR>", "index" },
+      -- i = { "<cmd>VimtexTocOpen<CR>", "index" },
       k = { "<cmd>on<CR>", "max split" },
       q = { "<cmd>wa! | qa!<CR>", "quit" },
       u = { "<cmd>Telescope undo<CR>", "undo" },

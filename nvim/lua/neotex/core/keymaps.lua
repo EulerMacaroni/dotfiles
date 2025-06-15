@@ -292,3 +292,7 @@ map("v", "K", "gk", {}, "Move up display line")
 -- Drag lines
 map("v", "J", ":m '>+1<CR>gv=gv",opts)
 map("v", "K", ":m '<-2<CR>gv=gv",opts)
+
+-- Actions: <C-o> and <C-i>
+-- vim.keymap.set("n", "<C-o>", "<leader>o", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-i>", "<leader>i", { noremap = true, silent = true })
