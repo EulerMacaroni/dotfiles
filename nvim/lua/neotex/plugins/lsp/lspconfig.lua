@@ -161,5 +161,26 @@ return {
       --   client.server_capabilities.documentFormattingProvider = false
       -- end,
     })
+    -- ── Swift (SourceKit-LSP) ──────────────────────────────────────────────────────
+    lspconfig["sourcekit"].setup({
+      -- If sourcekit-lsp is already on your PATH (Xcode 13+ or the
+      -- official Swift toolchain puts it in /usr/bin), you can omit cmd.
+      -- Otherwise, give the full path:
+      --   cmd = { "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp" },
+      capabilities = default,
+      filetypes = { "swift", "objective-c", "objective-cpp" },
+      -- SwiftPM projects have a buildServer.json that SourceKit-LSP reads,
+      -- but falling back to Package.swift / .git covers most cases.
+      root_dir = require("lspconfig.util").root_pattern("buildServer.json", "Package.swift", ".git"),
+      -- Optional tweaks
+      settings = {
+        -- You can turn on inlay hints the way you did for tsserver:
+        -- swift = { inlayHints = { ... } }
+      },
+      init_options = {
+        -- Enable server-side formatting if you have swift-format on PATH
+        formatting = true,
+      },
+    })
   end,
 }
