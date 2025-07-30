@@ -272,7 +272,13 @@ if.app-id = 'com.apple.Notes'
 run = "move-node-to-workspace N"
 
 
-# Notes on workspace 0
+# Notes on workspace O
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
 run = "move-node-to-workspace O"
+
+# Notes on workspace O
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = "move-node-to-workspace O"
+
