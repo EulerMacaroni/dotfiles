@@ -156,5 +156,36 @@ return {
         formatting = true,
       },
     })
+    -- Rust
+    lspconfig["rust_analyzer"].setup({
+      capabilities = default,
+      cmd = { "rust-analyzer" },
+      filetypes = { "rust" },
+      root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json", ".git"),
+      settings = {
+        ["rust-analyzer"] = {
+          cargo = {
+            allFeatures = true,
+            buildScripts = { enable = true },
+          },
+          procMacro = { enable = true },
+          check = { -- run `clippy` on save
+            command = "clippy",
+            extraArgs = { "--all-targets", "--all-features" },
+          },
+          inlayHints = {
+            enable = true,
+            bindingModeHints = { enable = true },
+            chainingHints = { enable = true },
+            parameterHints = { enable = true },
+            typeHints = { enable = true },
+          },
+          diagnostics = { enable = true },
+          files = {
+            excludeDirs = { ".git", "target", "node_modules" },
+          },
+        },
+      },
+    })
   end,
 }
