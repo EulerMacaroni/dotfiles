@@ -20,7 +20,9 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
     end
+    -- Ruff for fast Python linting/diagnostics
     require("lspconfig").ruff.setup({
+      capabilities = default,
       settings = {
         ruff = {
           lineLength = 100,
@@ -40,19 +42,26 @@ return {
       },
     })
 
-    require("lspconfig").pylsp.setup({
+    -- Use basedpyright for Python type checking, navigation, and completions
+    local util = require("lspconfig.util")
+    require("lspconfig").basedpyright.setup({
+      capabilities = default,
+      root_dir = util.root_pattern(
+        "pyproject.toml",
+        "setup.cfg",
+        "setup.py",
+        "requirements.txt",
+        ".git"
+      ),
       settings = {
-        pylsp = {
-          plugins = {
-            pylint = { enabled = false },
-            pyflakes = { enabled = false },
-            pycodestyle = { enabled = false },
-            pylsp_mypy = { enabled = false },
-            yapf = { enabled = false },
-            pydocstyle = { enabled = false },
-            flake8 = { enabled = false },
-            jedi_completion = { include_params = true },
-            jedi_signature_help = { enabled = true },
+        basedpyright = {
+          disableOrganizeImports = true, -- Let Ruff handle imports if desired
+          analysis = {
+            typeCheckingMode = "basic", -- or "strict" if you want
+            autoImportCompletions = true,
+            autoSearchPaths = true,
+            diagnosticMode = "openFilesOnly", -- faster on large repos
+            useLibraryCodeForTypes = true,
           },
         },
       },

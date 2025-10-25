@@ -34,12 +34,8 @@ return {
     -- configure null_ls
     -- Add debug logging
     null_ls.setup({
-      debug = true,
-      log = {
-        enable = true,
-        level = "trace",
-        use_console = false,
-      },
+      -- Keep logging light to avoid overhead during edits
+      debug = false,
       root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
       sources = {
         -- Lua
