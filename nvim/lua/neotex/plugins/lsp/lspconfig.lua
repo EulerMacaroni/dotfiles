@@ -12,9 +12,11 @@ return {
 
     local default = cmp_nvim_lsp.default_capabilities()
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = "rounded",
-    })
+    -- Rounded borders for hover, signature help, and diagnostics floats
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    vim.diagnostic.config({ float = { border = "rounded" } })
     local signs = { Error = "", Warn = "", Hint = "󰠠", Info = "" }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
@@ -23,6 +25,10 @@ return {
     -- Ruff for fast Python linting/diagnostics
     require("lspconfig").ruff.setup({
       capabilities = default,
+      -- Avoid intercepting hover so basedpyright provides docs immediately
+      on_attach = function(client)
+        client.server_capabilities.hoverProvider = false
+      end,
       settings = {
         ruff = {
           lineLength = 100,

@@ -401,7 +401,7 @@ return {
         c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "code action" },
         d = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
         D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "declaration" },
-        h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "hover" },
+        h = { "<cmd>lua require('hover').hover()<CR>", "hover" },
         i = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
         k = { "<cmd>LspStop<CR>", "kill lsp" },
         l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "line diagnostics" },

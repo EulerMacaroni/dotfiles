@@ -17,7 +17,18 @@ return {
           mocha = function(colors)
             return {
               NormalFloat = { bg = "#1e1e2e", fg = colors.text },
-              -- FloatBorder = { bg = "#1e1e2e", fg = colors.lavender },
+              -- Give floating windows (e.g. LSP hover) a clear border
+              FloatBorder = { bg = "#1e1e2e", fg = colors.lavender },
+              -- Optional: also tint LSP info window borders similarly
+              LspInfoBorder = { bg = "#1e1e2e", fg = colors.lavender },
+              -- Neovim 0.10+ specific LSP float highlight groups
+              LspFloatWinNormal = { bg = "#1e1e2e", fg = colors.text },
+              LspFloatWinBorder = { bg = "#1e1e2e", fg = colors.lavender },
+              -- nvim-cmp window borders
+              CmpBorder = { bg = "#1e1e2e", fg = colors.lavender },
+              CmpDocBorder = { bg = "#1e1e2e", fg = colors.lavender },
+              -- optional: a title color for floats/hover
+              FloatTitle = { bg = "#1e1e2e", fg = colors.lavender, bold = true },
             }
           end,
         },
