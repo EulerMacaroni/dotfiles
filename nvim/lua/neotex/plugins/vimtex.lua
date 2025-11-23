@@ -1,30 +1,53 @@
--- don't mess with this ... 
 return {
-	"lervag/vimtex",
-	init = function()
-		vim.g["vimtex_view_method"] = "zathura_simple" -- main variant with xdotool (requires X11; not compatible with wayland)
-		-- vim.g['vimtex_view_method'] = 'zathura_simple' -- for variant without xdotool to avoid errors in wayland
-		vim.g["vimtex_quickfix_mode"] = 0 -- suppress error reporting on save and build
-		vim.g["vimtex_mappings_enabled"] = 0 -- Ignore mappings
-		vim.g["vimtex_indent_enabled"] = 0 -- Auto Indent
-		vim.g["tex_flavor"] = "latex" -- how to read tex files
-		vim.g["tex_indent_items"] = 0 -- turn off enumerate indent
-		vim.g["tex_indent_brace"] = 0 -- turn off brace indent
-		vim.g["vimtex_context_pdf_viewer"] = "zathura_simple" -- external PDF viewer run from vimtex menu command
-		vim.g["vimtex_compiler_progname"] = "nvr"
-		vim.g["vimtex_log_ignore"] = { -- Error suppression:
-			"Underfull",
-			"Overfull",
-			"specifier changed to",
-			"Token not allowed in a PDF string",
-		}
-		vim.g.tex_conceal = "abdmg"
+  "lervag/vimtex",
+  init = function()
+    -- Viewer settings
+    vim.g.vimtex_view_method = "sioyek" -- Sioyek PDF viewer for academic documents
+    -- Note: Not setting vimtex_view_sioyek_options allows VimTeX to handle window management
+    -- It will open new windows when needed but reuse for the same document
+    vim.g.vimtex_context_pdf_viewer = "okular" -- External PDF viewer for the Vimtex menu
 
-	  -- vim.opt.conceallevel = 0 -- to see the symbols on .tex file
-    --
-		vim.g.vimtex_view_general_options =
-			[[--synctex-forward @line:@col:@tex --synctex-editor-command 'nvim --headless --server /tmp/nvimserver --remote-send "<CR>:e %:p<CR>:call cursor(@line, 1)<CR>"']]
+    -- Formatting settings
+    -- vim.g.vimtex_format_enabled = true             -- Enable formatting with latexindent
+    -- vim.g.vimtex_format_program = 'latexindent'
 
-		vim.cmd('let $NVIM_LISTEN_ADDRESS = "/tmp/nvimserver"')
-	end,
+    -- Indentation settings
+    vim.g.vimtex_indent_enabled = false -- Disable auto-indent from Vimtex
+    vim.g.tex_indent_items = false -- Disable indent for enumerate
+    vim.g.tex_indent_brace = false -- Disable brace indent
+
+    -- Compiler settings
+    vim.g.vimtex_compiler_method = "latexmk" -- Explicit compiler backend selection
+    vim.g.vimtex_compiler_latexmk = { -- latexmk configuration
+      build_dir = "build", -- Build artifacts directory
+      out_dir = "build", -- Output directory for PDF and aux files
+      aux_dir = "build", -- Auxiliary files directory
+      options = {
+        "-xelatex", -- Use XeLaTeX engine
+        "-interaction=nonstopmode", -- Don't stop on errors
+        "-file-line-error", -- Better error messages
+        "-synctex=1", -- Enable SyncTeX
+      },
+    }
+
+    -- Quickfix settings
+    vim.g.vimtex_quickfix_mode = 0 -- Open quickfix window on errors (2 = auto-close when empty)
+    vim.g.vimtex_quickfix_ignore_filters = { -- Filter out common noise
+      "Underfull",
+      "Overfull",
+      "specifier changed to",
+      "Token not allowed in a PDF string",
+      "Package hyperref Warning",
+    }
+    vim.g.vimtex_log_ignore = { -- Suppress specific log messages
+      "Underfull",
+      "Overfull",
+      "specifier changed to",
+      "Token not allowed in a PDF string",
+    }
+
+    -- Other settings
+    vim.g.vimtex_mappings_enabled = false -- Disable default mappings
+    vim.g.tex_flavor = "latex" -- Set file type for TeX files
+  end,
 }

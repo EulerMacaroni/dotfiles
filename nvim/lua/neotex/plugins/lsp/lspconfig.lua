@@ -171,6 +171,13 @@ return {
         formatting = true,
       },
     })
+
+    -- Terraform
+    lspconfig["terraformls"].setup({
+      capabilities = default,
+      filetypes = { "terraform", "terraform-vars" },
+      root_dir = require("lspconfig.util").root_pattern(".terraform", ".git"),
+    })
     -- Rust
     lspconfig["rust_analyzer"].setup({
       capabilities = default,
