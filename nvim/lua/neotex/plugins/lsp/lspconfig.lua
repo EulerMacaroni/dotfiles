@@ -82,7 +82,7 @@ return {
           },
           chktex = {
             onEdit = false,
-            onOpenAndSave = false,
+            onOpenAndSave = true,
           },
           diagnosticsDelay = 300,
           -- formatterLineLength = 80,

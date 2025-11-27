@@ -3,7 +3,7 @@
 
 # PDF Generation Mode
 # 1 = pdflatex, 4 = lualatex, 5 = xelatex
-$pdf_mode = 5;  # Use XeLaTeX for Unicode and modern font support
+$pdf_mode = 1;
 
 # Draft Mode Support
 # Set $draft_mode=1 via command line or environment for fast iteration
@@ -44,8 +44,8 @@ $max_repeat = 5;
 $clean_ext = "bbl nav snm vrb run.xml synctex.gz";
 
 # Preview/Viewer Configuration
-# Prefer a direct sioyek call so it works cross-platform (macOS/Linux)
-$pdf_previewer = 'sioyek --reuse-instance %S';
+# (This can be overridden by VimTeX)
+$pdf_previewer = 'start sioyek %S';
 
 # Continuous Mode
 # Auto-recompile on file changes (can be enabled per-project)
