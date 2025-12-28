@@ -127,6 +127,13 @@ return {
       root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
     })
 
+    lspconfig["clangd"].setup({
+      capabilities = default,
+      cmd = { "clangd" },
+      filetypes = { "c", "cpp", "objc", "objcpp" },
+      root_dir = util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+    })
+
     lspconfig["tsserver"].setup({
       capabilities = default,
       filetypes = {
