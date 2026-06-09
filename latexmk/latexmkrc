@@ -3,7 +3,7 @@
 
 # PDF Generation Mode
 # 1 = pdflatex, 4 = lualatex, 5 = xelatex
-$pdf_mode = 1;
+$pdf_mode = 4;
 
 # Draft Mode Support
 # Set $draft_mode=1 via command line or environment for fast iteration

@@ -1,86 +1,4 @@
---[[ KEYBINDINGS REFERENCE
 
-NOTE: These mappings are also documented in ~/.config/nvim/README.md
-Please maintain consistency between both documents when making changes.
-
-This file defines global keybindings, with special handling for terminal, markdown,
-and Avante AI buffers. The file organizes keymaps by functionality and uses helper
-functions for consistent definitions.
-
-Global keymaps use the `map()` function with descriptions, while buffer-specific maps
-use the `buf_map()` function via special setup functions like `set_terminal_keymaps()`,
-which are called by autocmds when specific filetypes are detected.
-
-----------------------------------------------------------------------------------
-TERMINAL MODE KEYBINDINGS                      | DESCRIPTION
-----------------------------------------------------------------------------------
-<Esc>                                          | Exit terminal mode to normal mode
-<C-t>                                          | Toggle terminal window
-<C-h>, <C-j>, <C-k>, <C-l>                     | Navigate between windows
-<C-a>                                          | Ask Avante AI a question (non-lazygit only)
-<M-h>, <M-l>, <M-Left>, <M-Right>              | Resize terminal window horizontally
-
-----------------------------------------------------------------------------------
-GENERAL KEYBINDINGS                            | DESCRIPTION
-----------------------------------------------------------------------------------
-<Space>                                        | Leader key for command sequences
-<C-z>                                          | Disabled (prevents accidental suspension)
-<C-t>                                          | Toggle terminal window
-<C-s>                                          | Show spelling suggestions with Telescope
-<CR> (Enter)                                   | Clear search highlighting
-<C-p>                                          | Find files with Telescope
-<C-;>                                          | Toggle comments for current line/selection
-<S-m>                                          | Show help for word under cursor
-<C-m>                                          | Search man pages with Telescope
-
-----------------------------------------------------------------------------------
-NAVIGATION KEYBINDINGS                         | DESCRIPTION
-----------------------------------------------------------------------------------
-Y                                              | Yank (copy) from cursor to end of line
-E                                              | Go to end of previous word
-m                                              | Center cursor at top of screen
-<C-h>, <C-j>, <C-k>, <C-l>                    | Navigate between windows
-<A-Left>, <A-Right>, <A-h>, <A-l>             | Resize window horizontally
-<Tab>                                          | Go to next buffer (by modified time)
-<S-Tab>                                        | Go to previous buffer (by modified time)
-<C-u>, <C-d>                                   | Scroll half-page up/down (with centering)
-<S-h>, <S-l>                                   | Go to start/end of display line
-J, K                                           | Navigate display lines (respects wrapping)
-
-----------------------------------------------------------------------------------
-TEXT MANIPULATION                              | DESCRIPTION
-----------------------------------------------------------------------------------
-<A-j>, <A-k>                                   | Move current line or selection up/down
-<, >                                           | Decrease/increase indentation (preserves selection)
-
---- not going to use these
-----------------------------------------------------------------------------------
-MARKDOWN-SPECIFIC KEYBINDINGS                  | DESCRIPTION
-----------------------------------------------------------------------------------
-<CR> (Enter)                                   | Create new bullet point
-o                                              | Create new bullet point below
-O                                              | Create new bullet point above
-<Tab>                                          | Indent bullet and recalculate numbers
-<S-Tab>                                        | Unindent bullet and recalculate numbers
-dd                                             | Delete line and recalculate list numbers
-d (visual mode)                                | Delete selection and recalculate numbers
-<C-n>                                          | Toggle checkbox status ([ ] ↔ [x])
-<C-c>                                          | Recalculate list numbering
-
---- not going to use these for now
-----------------------------------------------------------------------------------
-AVANTE AI BUFFER KEYBINDINGS                   | DESCRIPTION
-----------------------------------------------------------------------------------
-<C-t>                                          | Toggle Avante interface
-<C-c>                                          | Reset/clear Avante content
-<C-m>                                          | Select model for current provider
-<C-p>                                          | Select provider and model
-<C-s>                                          | Stop AI generation
-<C-d>                                          | Select provider/model with default option
-<CR> (Enter)                                   | Create new line (prevents submission)
---]]
-
-------------------------------------------
 -- CONFIGURATION AND UTILITY FUNCTIONS --
 ------------------------------------------
 local opts = { noremap = true, silent = true }
@@ -238,6 +156,8 @@ map("n", "<C-m>", '<cmd>Telescope man_pages<cr>', {}, "Search man pages")
 map("n", "Y", "y$", {}, "Yank to end of line")
 map("n", "E", "ge", {}, "Go to end of previous word")
 map("v", "Y", "y$", {}, "Yank to end of line")
+-- paste fix
+map("x", "p", '"_dP', {}, "Paste without overwriting yank")
 
 -- Cursor centering
 map("n", "m", "zt", {}, "Center cursor at top")

@@ -179,6 +179,15 @@ return {
       },
     })
 
+    -- Mojo
+    lspconfig["mojo"].setup({
+      capabilities = default,
+      cmd = { "mojo-lsp-server" },
+      filetypes = { "mojo" },
+      root_dir = util.root_pattern(".git"),
+      single_file_support = true,
+    })
+
     -- Terraform
     lspconfig["terraformls"].setup({
       capabilities = default,
